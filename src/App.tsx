@@ -1,8 +1,8 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import SideBar from "./components/SideBar";
-import ChatContainer from "./components/ChatContainer";
+import SideBar from "./components/SideBar.tsx";
+import ChatContainer from "./components/ChatContainer.tsx";
 
 function App() {
   return (
