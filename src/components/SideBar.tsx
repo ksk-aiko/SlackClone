@@ -3,7 +3,7 @@ import {Home, ChatBubble} from "@mui/icons-material";
 
 const SideBar = () => {
   return (
-    <div className="w-16 h-screen bg-gray-900">
+    <div className="w-16 h-screen bg-gray-900 text-white">
       <div className="py-5 flex flex-col items-center">
         <div className="bg-gray-700 p-2 rounded-lg">
           <Home/>
