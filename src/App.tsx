@@ -3,12 +3,14 @@ import React from 'react';
 import './App.css';
 import SideBar from "./components/SideBar.tsx";
 import ChatContainer from "./components/ChatContainer.tsx";
+import Login from './components/Login.tsx';
 
 function App() {
   return (
     <div className="flex">
-      <SideBar />
-      <ChatContainer />
+      <Login />
+      {/* <SideBar />
+      <ChatContainer /> */}
     </div>
   );
 }
