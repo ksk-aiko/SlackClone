@@ -1,7 +1,18 @@
 import React from 'react';
 import {signInWithGoogle} from '../features/auth/Auth.ts';
+import {getUser} from '../features/users/userAPI.ts';
 
 const Login = () => {
+    const getUserInfo = async () => {
+        try {
+            const user = getUser('DQAWv70Bka9DZBIZX9Ww');
+            if (user) {
+                console.log(user);
+            }
+        } catch (error) {
+            console.log('Login failed:', error);
+        }
+    }
     const loginWithGoogle = async () => {
         try {
             const result = await signInWithGoogle();
@@ -22,7 +33,7 @@ const Login = () => {
                     <div className="flex items-center justify-center">
                         <button 
                         className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        onClick={loginWithGoogle}>
+                        onClick={getUserInfo}>
                         ログイン
                         </button>
                     </div>

@@ -5,7 +5,7 @@
  * @returns {Promise<User | undefined>} ユーザー情報を含むPromise。ドキュメントが存在しない場合はundefinedを返す。
  */
 import {doc, getDoc, getFirestore} from 'firebase/firestore';
-import {firebaseApp} from '../../firebase/firebaseConfig';
+import {firebaseApp} from '../../firebase/firebaseConfig.ts';
 import {User} from '../../type/User';
 
 // Firestoreデータベースのインスタンスを取得
