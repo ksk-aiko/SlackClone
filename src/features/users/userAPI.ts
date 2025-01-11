@@ -1,8 +1,8 @@
 /**
- * 指定されたユーザーUIDのユーザー情報を取得する非同期関数
+* Asynchronous function that retrieves user information for the specified user UID
  * 
- * @param {string} user_uid - ユーザーのUID
- * @returns {Promise<User | undefined>} ユーザー情報を含むPromise。ドキュメントが存在しない場合はundefinedを返す。
+ * @param {string} user_uid - User UID
+ * @returns {Promise<User | undefined>} Promise containing user information. If no documentation exists, undefined is returned.
  */
 import {doc, getDoc, setDoc getFirestore} from 'firebase/firestore';
 import {firebaseApp} from '../../firebase/firebaseConfig.ts';

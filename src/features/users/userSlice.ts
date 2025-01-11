@@ -1,26 +1,59 @@
+/**
+ * A slice for managing user status.
+ *
+ * @remarks.
+ * This slice handles user login and logout actions.
+ *
+ * @packageDocumentation.
+ */
+
+
+ 
 import {createSlice} from '@reduxjs/toolkit';
+import {signInWithGoogle} from '../auth/Auth.ts';
+import {getUser, postUser} from './userAPI.ts';
+import {User} from '../../type/User.ts';
 
 const initialState = {
     userId: ""
 }
 
 /**
- * ユーザーの状態を管理するためのスライス。
- * 
- * @remarks
- * このスライスはユーザーのログインおよびログアウトのアクションを処理します。
- * 
- * @packageDocumentation
+ * Function to sign in with Google and set up a user account.
+ *
+ * @returns {Promise<string>} Promise containing the user ID.
  */
+export const googleSignInAndUserSetup = async () => {
+    try {
+        const result = await signInWithGoogle();
+        const login_user = result.user;
+        const user = await getUser(login_user.uid);
+
+        if (!user) {
+            const newUser: User = {
+                profile_picture: login_user.photoURL ?? "",
+                email: login_user.email ?? "",
+                displayName: login_user.displayName ?? "",
+            }
+            await postUser({
+                uid: login_user.uid,
+                user: newUser
+            })
+        }
+        return login_user.uid;
+    } catch (error) {
+        console.error('Login failed:', error);
+}
+}
 
 /**
- * ユーザーIDを管理するためのスライス。
- * 
- * @param {string} name - スライスの名前。
- * @param {object} initialState - スライスの初期状態。
- * @param {object} reducers - スライスのリデューサー。
- * @param {function} reducers.login - ユーザーIDを設定するためのリデューサー。
- * @param {function} reducers.logout - ユーザーIDをクリアするためのリデューサー。
+ * Slice to manage user IDs.
+ *
+ * @param {string} name - Name of the slice.
+ * @param {object} initialState - Initial state of the slice.
+ * @param {object} reducers - reducers for the slice.
+ * @param {function} reducers.login - Reducer to set the user ID.
+ * @param {function} reducers.logout - reducer for clearing user id.
  */
 const userSlice = createSlice({
     name: "userId",
