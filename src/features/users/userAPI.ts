@@ -4,23 +4,32 @@
  * @param {string} user_uid - ユーザーのUID
  * @returns {Promise<User | undefined>} ユーザー情報を含むPromise。ドキュメントが存在しない場合はundefinedを返す。
  */
-import {doc, getDoc, getFirestore} from 'firebase/firestore';
+import {doc, getDoc, setDoc getFirestore} from 'firebase/firestore';
 import {firebaseApp} from '../../firebase/firebaseConfig.ts';
-import {User} from '../../type/User';
+import {User, UserRef} from '../../type/User';
 
-// Firestoreデータベースのインスタンスを取得
+// Obtain an instance of the Firestore database
 const db = getFirestore(firebaseApp);
 
-// ユーザー情報を取得する関数
+// Function to get user information
 export const getUser = async(user_uid: string) => {
-    // 指定されたユーザーUIDのドキュメント参照を取得
+    // Get the document reference for the specified user UID
     const userRef = doc(db, 'users', user_uid);
-    // ドキュメントのスナップショットを取得
+    // Get a snapshot of the document
     const docSnap = await getDoc(userRef);
-    // ドキュメントが存在する場合、データをUser型として返す
+    // If document exists, return data as type User
     if (docSnap.exists()) {
         return docSnap.data() as User;
     }
 }
+
+export const postUser = async (userRef:UserRef) => {
+    const user = userRef.user;
+    await setDoc(doc(db, 'users', userRef.uid), {
+        displayName: user.displayName,
+        email: user.email,
+        profile_picture: user.profile_picture
+    });
+};
 
 
