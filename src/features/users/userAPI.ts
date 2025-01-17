@@ -4,7 +4,7 @@
  * @param {string} user_uid - User UID
  * @returns {Promise<User | undefined>} Promise containing user information. If no documentation exists, undefined is returned.
  */
-import {doc, getDoc, setDoc getFirestore} from 'firebase/firestore';
+import {doc, getDoc, setDoc, getFirestore} from 'firebase/firestore';
 import {firebaseApp} from '../../firebase/firebaseConfig.ts';
 import {User, UserRef} from '../../type/User';
 
