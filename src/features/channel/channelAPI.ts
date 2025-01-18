@@ -22,6 +22,8 @@ import {
     query,
     collection,
     onSnapshot,
+    Timestamp,
+    addDoc,
 } from "firebase/firestore";
 import { firebaseApp } from "../../firebase/firebaseConfig.ts";
 import { Channel, ChannelRef} from "../../type/Channel.ts";
@@ -49,4 +51,27 @@ export const subscribeChannels = (
             console.error("Failed to subscribe to channels:", error);
         }
     );
+};
+
+/**
+ * Posts a new channel to the "channels" collection in Firestore.
+ * 
+ * @param channel - The channel object to post.
+ * 
+ * @example
+ * ```typescript
+ * const channel = createChannel("general");
+ * postChannel(channel);
+ * ```
+ */
+export const postChannel = async (channel: Channel) => {
+    await addDoc(collection(db, "channels"), channel);
+};
+
+export const createChannel = (name: string): Channel => {
+    const timestamp = Timestamp.fromDate(new Date());
+    return {
+        name: name,
+        create_at: timestamp,
+    };
 };
