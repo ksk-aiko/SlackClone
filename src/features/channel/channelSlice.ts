@@ -20,6 +20,7 @@ export const channelSlice = createSlice({
      * @type {string}
      */
     name: "channelId",
+    initialState,
     reducers: {
         /**
          * Action to select a channel by setting the current channel ID.
