@@ -48,7 +48,7 @@ const ChatList = () => {
       </div>
       <div className="overflow-y-auto">
         {channelRefs.map(({ channel, id}) => (
-          <ChannelCell channel={channel} id={id} />
+          <ChannelCell channel={channel} id={id}/>
         ))}
       </div>
       <div className="px-4 py-2">
