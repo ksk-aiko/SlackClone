@@ -17,10 +17,13 @@ import React, { useEffect, useState } from "react";
 import { subscribeChannels } from '../../features/channel/channelAPI.ts';
 import { ChannelRef } from '../../type/Channel.ts';
 import ChannelCell from './ChannelCell.tsx';
+import ChannelAddModal from "./ChannelAddModal.tsx";
 
 const ChatList = () => {
   // State to store the list of channel references
   const [channelRefs, setChannelRefs] = useState<ChannelRef[]>([]);
+  // State to control the visibility of the modal
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   // Subscribe to channel updates when the component mounts
   useEffect(() => {
@@ -29,6 +32,14 @@ const ChatList = () => {
     });
     return () => unsubscribe();
   }, []);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  }
 
   return (
     <div className="w-64 bg-gray-800">
@@ -41,9 +52,13 @@ const ChatList = () => {
         ))}
       </div>
       <div className="px-4 py-2">
-        <button className="text-gray-300 hover:text-white">
+        <button
+          className="text-gray-300 hover:text-white"
+          onClick={handleOpenModal}
+          >
           + チャンネルを追加する
         </button>
+        {showModal && <ChannelAddModal handleCloseModal={handleCloseModal}/>}
       </div>
     </div>
   );
