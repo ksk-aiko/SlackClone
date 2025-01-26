@@ -27,6 +27,7 @@ import {getUser} from "../../features/users/userAPI.ts"
 
 interface MessageTileProps {
     message: Message;
+    key: string;
 }
 const MessageTile = (message: MessageTileProps) => {
     const [owner, setUser] = useState<User | null>(null);

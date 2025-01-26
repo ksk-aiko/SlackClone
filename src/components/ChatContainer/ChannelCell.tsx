@@ -20,6 +20,7 @@ import {Channel} from "../../type/Channel.ts";
 type Props = {
     channel: Channel
     id: string
+    key: string
 }
 
 const ChannelCell = ({channel, id}: Props) => {

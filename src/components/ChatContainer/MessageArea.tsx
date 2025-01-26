@@ -34,7 +34,7 @@ import MessageTile from "./MessageTile.tsx";
 const MessageArea = () => {
   // State to hold the list of message references
   const [messageRefs, setMessageRefs] = useState<MessageRef[]>([]);
-  const userId = useAppSelector((state) => state.user.id);
+  const userId = useAppSelector((state) => state.user.userId);
   const channelId :string = useAppSelector(state => state.channel.currentChannelId);
 
   // State to hold the message being typed
