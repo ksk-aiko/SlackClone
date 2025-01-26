@@ -1,3 +1,25 @@
+/**
+ * MessageTile component displays a single message along with the user information.
+ * 
+ * @component
+ * @param {MessageTileProps} message - The message object containing the message details.
+ * 
+ * @typedef {Object} MessageTileProps
+ * @property {Message} message - The message object containing the message details.
+ * 
+ * @typedef {Object} User
+ * @property {string} id - The unique identifier of the user.
+ * @property {string} displayName - The display name of the user.
+ * @property {string} profile_picture - The URL of the user's profile picture.
+ * 
+ * @typedef {Object} Message
+ * @property {string} id - The unique identifier of the message.
+ * @property {string} user_id - The unique identifier of the user who sent the message.
+ * @property {Date} create_at - The timestamp when the message was created.
+ * @property {string} content - The content of the message.
+ * 
+ * @returns {JSX.Element} The rendered MessageTile component.
+ */
 import React, {useEffect, useState} from 'react';
 import {User} from "../../type/User.ts";
 import {Message} from "../../type/Message.ts";
