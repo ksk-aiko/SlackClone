@@ -1,22 +1,49 @@
+/**
+ * MessageArea component is responsible for rendering the chat interface.
+ * It allows users to type and send messages, and displays the list of messages in the current channel.
+ *
+ * @component
+ * @example
+ * return (
+ *   <MessageArea />
+ * )
+ *
+ * @returns {JSX.Element} The rendered MessageArea component.
+ *
+ * @remarks
+ * This component uses the following hooks:
+ * - `useState` to manage the state of the message being typed and the list of message references.
+ * - `useEffect` to subscribe to messages in the current channel.
+ * - `useAppSelector` to access the user ID and current channel ID from the Redux store.
+ *
+ * The component also includes the following functions:
+ * - `handleInputChange` to update the message state when the user types in the textarea.
+ * - `sendMessage` to send a message when the user clicks the send button or presses the Enter key.
+ * - `handleKeyDown` to detect when the user presses the Enter key and send the message.
+ *
+ * The component renders a list of `MessageTile` components for each message reference and a textarea for typing messages.
+ */
 import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 import { TextareaAutosize } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import {MessageRef} from "../../type/Message.ts";
 import {useAppSelector} from "../../app/hook.ts";
 import {createMessage, subscribeMessages, postMessage} from "../../features/message/messageAPI.ts";
-import MessageTile from "./MessageTile.ts";
+import MessageTile from "./MessageTile.tsx";
 
 const MessageArea = () => {
-
+  // State to hold the list of message references
   const [messageRefs, setMessageRefs] = useState<MessageRef[]>([]);
   const userId = useAppSelector((state) => state.user.id);
   const channelId :string = useAppSelector(state => state.channel.currentChannelId);
 
+  // State to hold the message being typed
   const [message, setMessage] = useState('');
   const handleInputChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   }
 
+  // Function to send a message
   const sendMessage = async () => {
     if(userId) {
       try {
@@ -28,12 +55,14 @@ const MessageArea = () => {
     }
   }
 
+  // Function to send a message when the user presses the Enter key
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if((e.metaKey || e.ctrlKey) && e.code === "Enter") {
       sendMessage();
     }
   }
 
+  // Subscribe to messages in the current channel
   useEffect(() => {
     const unsubscribe = subscribeMessages(channelId, (messageRefs) => {
       setMessageRefs(messageRefs);
@@ -41,6 +70,7 @@ const MessageArea = () => {
     return () => unsubscribe();
   }, [channelId]);
 
+  // Render the message area
   return (
     <div className="flex-1 flex-col bg-gray-500 text-white">
       <div className="p-4 m-3 overflow-auto">
