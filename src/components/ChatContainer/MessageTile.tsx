@@ -53,6 +53,7 @@ const MessageTile = (message: MessageTileProps) => {
                 <div className="text-sm font-semibold">{owner?.displayName || "unKnown"}</div>
                 <div className="text-xs text-gray-400">{message.message.create_at.toDate().toLocaleString() || ""}</div>
             </div>
+            <p className="text-gray-300">{message.message.text}</p>
         </div>
     );
 };

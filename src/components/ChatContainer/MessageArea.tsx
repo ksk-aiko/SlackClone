@@ -48,7 +48,8 @@ const MessageArea = () => {
   const sendMessage = async () => {
     if(userId) {
       try {
-        await postMessage(createMessage(userId, channelId, message))
+        await postMessage(createMessage(userId, channelId, message));
+        console.log('Message sent:', message);
         setMessage("");
       } catch (e) {
         console.error('Error sending message: ', e);
@@ -66,8 +67,9 @@ const MessageArea = () => {
   // Subscribe to messages in the current channel
   useEffect(() => {
     const unsubscribe = subscribeMessages(channelId, (messageRefs) => {
+      console.log('Messages received:', messageRefs);
       setMessageRefs(messageRefs);
-    })
+    });
     return () => unsubscribe();
   }, [channelId]);
 
@@ -90,7 +92,7 @@ const MessageArea = () => {
             value={message}
           />
           <button 
-            className="test-gray-400 hover:text-white"
+            className="text-gray-400 hover:text-white"
             onClick={sendMessage}
           >
             <SendIcon />

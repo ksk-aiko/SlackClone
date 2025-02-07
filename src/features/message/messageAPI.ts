@@ -14,7 +14,7 @@ const db = getFirestore(firebaseApp);
 
 export const subscribeMessages = (channelId: string, onMessageUpdated: (messages: MessageRef[]) => void) => {
     // Get documents with matching channelId from the Firestore's messages collection
-    const q = query(collection(db, "messages"), where("channelId", "==", channelId));
+    const q = query(collection(db, "messages"), where("channel_id", "==", channelId));
 
     // Subscribe to the query
     return onSnapshot(q, (querySnapshot) => {
