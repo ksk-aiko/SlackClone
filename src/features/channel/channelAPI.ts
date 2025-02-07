@@ -24,6 +24,9 @@ import {
     onSnapshot,
     Timestamp,
     addDoc,
+    doc,
+    updateDoc,
+    deleteDoc
 } from "firebase/firestore";
 import { firebaseApp } from "../../firebase/firebaseConfig.ts";
 import { Channel, ChannelRef} from "../../type/Channel.ts";
@@ -75,3 +78,45 @@ export const createChannel = (name: string): Channel => {
         create_at: timestamp,
     };
 };
+
+/**
+ * Updates the name of an existing channel in the "channels" collection in Firestore.
+ * 
+ * @param channelId - The ID of the channel to update.
+ * @param name - The new name for the channel.
+ * 
+ * @returns A promise that resolves to an object indicating the success of the operation.
+ */
+
+export const updateChannel = async (channelId: string, name: string) => {
+    try {
+        const channelRef = doc(db, "channels", channelId);
+        await updateDoc(channelRef, {
+            name: name,
+            update_at: Timestamp.fromDate(new Date()),
+        });
+        return {success: true};
+    } catch (error) {
+        console.error("Error updateing channel:", error);
+        throw error;
+    }
+}
+
+/**
+ * Deletes a channel from the "channels" collection in Firestore.
+ * 
+ * @param channelId - The ID of the channel to delete.
+ * 
+ * @returns A promise that resolves to an object indicating the success of the operation.
+ * 
+ */
+export const deleteChannel = async (channelId: string) => {
+    try {
+        const channelRef = doc(db, "channels", channelId);
+        await deleteDoc(channelRef);
+        return {success: true};
+    } catch (error) {
+        console.error("Error deleting channel:", error);
+        throw error;
+    }
+}
