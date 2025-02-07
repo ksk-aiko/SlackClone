@@ -1,3 +1,4 @@
+// TODO: fix textarea styling
 /**
  * MessageArea component is responsible for rendering the chat interface.
  * It allows users to type and send messages, and displays the list of messages in the current channel.
@@ -72,7 +73,7 @@ const MessageArea = () => {
 
   // Render the message area
   return (
-    <div className="flex-1 flex-col bg-gray-500 text-white">
+    <div className="flex flex-1 flex-col bg-gray-500 text-white">
       <div className="p-4 m-3 overflow-auto">
         {messageRefs.map((messageRef) => (
           <MessageTile message={messageRef.message} key={messageRef.id}/>
