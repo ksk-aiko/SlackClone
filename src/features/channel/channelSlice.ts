@@ -98,7 +98,7 @@ export const channelSlice = createSlice({
         } 
     },
     extraReducers: (builder) => {
-        builder.
+        builder
            .addCase(updateChannelAsync.pending, (state) => {
             state.status = 'loading';
            })
