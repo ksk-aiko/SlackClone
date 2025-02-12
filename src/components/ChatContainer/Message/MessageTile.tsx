@@ -30,16 +30,17 @@ import {MessageMenu} from "./MessageMenu.tsx";
 // this interface is used to define the props that are passed to the MessageTile component
 interface MessageTileProps {
     message: Message;
+    id: string;
     key: string;
 }
 
 // this component is used to render a single message along with the user information
-const MessageTile = (message: MessageTileProps) => {
+const MessageTile = ({message, id}: MessageTileProps) => {
     const [owner, setUser] = useState<User | null>(null);
     useEffect(() => {
         const fetchUser = async () => {
         try {
-            const ownerData = await getUser(message.message.user_id);
+            const ownerData = await getUser(message.user_id);
             if(ownerData) {
                 setUser(ownerData);
             }
@@ -56,10 +57,10 @@ const MessageTile = (message: MessageTileProps) => {
             <div className="flex items-center mb-2">
                 <img src={owner?.profile_picture || './default-user-icon.webp'} alt="profile picture" className="w-10 h-10 rounded-full mr-2" />
                 <div className="text-sm font-semibold">{owner?.displayName || "unKnown"}</div>
-                <div className="text-xs text-gray-400">{message.message.create_at.toDate().toLocaleString() || ""}</div>
+                <div className="text-xs text-gray-400">{message.create_at.toDate().toLocaleString() || ""}</div>
             </div>
-            <p className="text-gray-300">{message.message.text}</p>
-            <MessageMenu messageId={message.message.create_at} messageText={message.message.text} />
+            <p className="text-gray-300">{message.text}</p>
+            <MessageMenu messageId={id} messageText={message.text} />
         </div>
         
     );
