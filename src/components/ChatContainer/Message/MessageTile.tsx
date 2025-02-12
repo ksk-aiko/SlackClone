@@ -21,9 +21,9 @@
  * @returns {JSX.Element} The rendered MessageTile component.
  */
 import React, {useEffect, useState} from 'react';
-import {User} from "../../type/User.ts";
-import {Message} from "../../type/Message.ts";
-import {getUser} from "../../features/users/userAPI.ts"
+import {User} from "../../../type/User.ts";
+import {Message} from "../../../type/Message.ts";
+import {getUser} from "../../../features/users/userAPI.ts"
 
 interface MessageTileProps {
     message: Message;

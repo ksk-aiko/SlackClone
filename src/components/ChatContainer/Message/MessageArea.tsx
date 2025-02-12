@@ -27,9 +27,9 @@
 import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 import { TextareaAutosize } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import {MessageRef} from "../../type/Message.ts";
-import {useAppSelector} from "../../app/hook.ts";
-import {createMessage, subscribeMessages, postMessage} from "../../features/message/messageAPI.ts";
+import {MessageRef} from "../../../type/Message.ts";
+import {useAppSelector} from "../../../app/hook.ts";
+import {createMessage, subscribeMessages, postMessage} from "../../../features/message/messageAPI.ts";
 import MessageTile from "./MessageTile.tsx";
 
 const MessageArea = () => {

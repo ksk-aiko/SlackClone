@@ -53,7 +53,7 @@ import {
 import {
   updateChannelAsync,
   deleteChannelAsync,
-} from "../../features/channel/channelSlice.ts";
+} from "../../../features/channel/channelSlice.ts";
 
 interface ChannelMenuProps {
   channelId: string;
