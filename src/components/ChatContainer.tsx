@@ -1,6 +1,6 @@
 import React from 'react';
 import ChatList from "./ChatContainer/ChatList.tsx";
-import MessageArea from "./ChatContainer/MessageArea.tsx";
+import MessageArea from "./ChatContainer/Message/MessageArea.tsx";
 
 const ChatContainer = () => {
   return (

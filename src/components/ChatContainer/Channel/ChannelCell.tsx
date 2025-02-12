@@ -17,7 +17,6 @@ import {useAppDispatch} from "../../../app/hook.ts";
 import {selectChannel} from "../../../features/channel/channelSlice.ts";
 import {Channel} from "../../../type/Channel.ts";
 import {ChannelMenu} from "./ChannelMenu.tsx";
-import styels from "./Channel.module.css";
 
 type Props = {
     channel: Channel

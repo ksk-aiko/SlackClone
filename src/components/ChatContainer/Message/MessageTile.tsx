@@ -20,15 +20,20 @@
  * 
  * @returns {JSX.Element} The rendered MessageTile component.
  */
+
 import React, {useEffect, useState} from 'react';
 import {User} from "../../../type/User.ts";
 import {Message} from "../../../type/Message.ts";
 import {getUser} from "../../../features/users/userAPI.ts"
+import {MessageMenu} from "./MessageMenu.tsx";
 
+// this interface is used to define the props that are passed to the MessageTile component
 interface MessageTileProps {
     message: Message;
     key: string;
 }
+
+// this component is used to render a single message along with the user information
 const MessageTile = (message: MessageTileProps) => {
     const [owner, setUser] = useState<User | null>(null);
     useEffect(() => {
@@ -54,7 +59,9 @@ const MessageTile = (message: MessageTileProps) => {
                 <div className="text-xs text-gray-400">{message.message.create_at.toDate().toLocaleString() || ""}</div>
             </div>
             <p className="text-gray-300">{message.message.text}</p>
+            <MessageMenu messageId={message.message.create_at} messageText={message.message.text} />
         </div>
+        
     );
 };
 

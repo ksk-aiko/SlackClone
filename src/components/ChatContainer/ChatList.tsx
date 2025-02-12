@@ -16,7 +16,7 @@
 import React, { useEffect, useState } from "react";
 import { subscribeChannels } from '../../features/channel/channelAPI.ts';
 import { ChannelRef } from '../../type/Channel.ts';
-import ChannelCell from './ChannelCell.tsx';
+import ChannelCell from './Channel/ChannelCell.tsx';
 import ChannelAddModal from "./Channel/ChannelAddModal.tsx";
 
 const ChatList = () => {

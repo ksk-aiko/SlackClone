@@ -28,7 +28,7 @@ import {
   Button 
 } from '@mui/material';
 import { MoreVert as MoreVertIcon } from '@mui/icons-material';
-import { updateMessageAsync, deleteMessageAsync } from '../../messageSlice.ts';
+import { updateMessageAsync, deleteMessageAsync } from '../../../features/message/messageSlice.ts';
 
 interface MessageMenuProps {
   messageId: string;
@@ -68,8 +68,8 @@ export const MessageMenu: FC<MessageMenuProps> = ({ messageId, messageText }) =>
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem onClick={() => setEditDialogOpen(true)}>編集</MenuItem>
-        <MenuItem onClick={() => setDeleteDialogOpen(true)}>削除</MenuItem>
+        <MenuItem onClick={() => setEditDialogOpen(true)}>Edit</MenuItem>
+        <MenuItem onClick={() => setDeleteDialogOpen(true)}>Delete</MenuItem>
       </Menu>
 
       {/* Edit Dialog */}
