@@ -92,9 +92,9 @@ export const MessageMenu: FC<MessageMenuProps> = ({ messageId, messageText }) =>
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setEditDialogOpen(false)}>キャンセル</Button>
+          <Button onClick={() => setEditDialogOpen(false)}>CANCEL</Button>
           <Button onClick={handleEdit} variant="contained" color="primary">
-            save
+            SAVE
           </Button>
         </DialogActions>
       </Dialog>
