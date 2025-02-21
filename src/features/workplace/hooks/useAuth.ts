@@ -20,7 +20,7 @@ import { User } from 'firebase/auth';
 
 const auth =  getAuth(firebaseApp);
 
-const useAuth = () => {
+export const useAuth = () => {
     // Manage the user state
     const [user, setUser] = useState<User | null>(null);
     // Manage the loading state
@@ -39,5 +39,3 @@ const useAuth = () => {
 
     return { user, loading };
 };
-
-export default useAuth;
