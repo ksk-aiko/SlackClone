@@ -21,4 +21,23 @@ export const useWorkplaces = () => {
     const [workplaces, setWorkplaces] = useState<Workplace[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
+
+    useEffect(() => {
+        if (!user) return;
+
+        const fetchWorkplaces = async () => {
+            try {
+                const data = await workplaceApi.listWorkplaces(user.id);
+                setWorkplaces(data);
+            } catch (err) {
+                setError(err instanceof Error ? err : new Error('Unknown error'));
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchWorkplaces();
+    }, [user]);
+
+    return { workplaces, loading, error };
 }
