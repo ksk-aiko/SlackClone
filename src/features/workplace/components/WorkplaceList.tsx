@@ -23,8 +23,8 @@ export const WorkplaceList: React.FC<WorkplaceListProps> = ({
 
     return (
         <div className="p-4">
-            <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold">Workplace</h2>
+            <div className="flex flex-col justify-between items-center mb-4">
+                <h2 className="text-xl font-bold text-white mb-4">Workplace</h2>
                 <button 
                     className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                     onClick={onCreateNew} 
@@ -34,7 +34,7 @@ export const WorkplaceList: React.FC<WorkplaceListProps> = ({
             </div>
 
             {workplaces.length === 0 ? (
-                <p className="text-gray-500">No Workplace</p>
+                <p className="text-white">No workplaces are currently registered</p>
             ) : (
                 <ul className="space-y-2">
                     {workplaces.map((workplace) => (

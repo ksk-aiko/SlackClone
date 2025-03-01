@@ -18,6 +18,7 @@ import { subscribeChannels } from '../../features/channel/channelAPI.ts';
 import { ChannelRef } from '../../type/Channel.ts';
 import ChannelCell from './Channel/ChannelCell.tsx';
 import ChannelAddModal from "./Channel/ChannelAddModal.tsx";
+import { WorkplaceManagement } from '../../features/workplace/components/WorkplaceManagement.tsx';
 
 const ChatList = () => {
   // State to store the list of channel references
@@ -59,6 +60,9 @@ const ChatList = () => {
           + チャンネルを追加する
         </button>
         {showModal && <ChannelAddModal handleCloseModal={handleCloseModal}/>}
+      </div>
+      <div className="px-4 py-2">
+        <WorkplaceManagement />
       </div>
     </div>
   );

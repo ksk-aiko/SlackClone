@@ -27,7 +27,7 @@ export const useWorkplaces = () => {
 
         const fetchWorkplaces = async () => {
             try {
-                const data = await workplaceApi.listWorkplaces(user.id);
+                const data = await workplaceApi.listWorkplaces(user.uid);
                 setWorkplaces(data);
             } catch (err) {
                 setError(err instanceof Error ? err : new Error('Unknown error'));

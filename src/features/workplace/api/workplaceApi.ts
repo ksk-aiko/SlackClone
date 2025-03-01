@@ -21,6 +21,7 @@
 import { getFirestore, collection, doc, setDoc, getDoc, getDocs, query, where} from "firebase/firestore";
 import { Workplace } from '../types/workplace.ts';
 import { firebaseApp } from '../../../firebase/firebaseConfig.ts';
+import { WorkplaceMember } from '../types/workplace.ts';
 
 const db = getFirestore(firebaseApp);
 
@@ -52,5 +53,11 @@ export const workplaceApi = {
         }
 
         return workplaces;
+    },
+
+    async addMember(member: Omit<WorkplaceMember, 'id'>): Promise<void> {
+        const memberRef = doc(collection(db, 'workplace_members'));
+        await setDoc(memberRef, member);
     }
+
 }
