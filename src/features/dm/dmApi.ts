@@ -1,3 +1,11 @@
+/**
+ * Direct Message API for Slack Clone
+ * 
+ * This module provides functions for interacting with direct messages in Firestore.
+ * It includes functionality for creating DM chats, sending messages, fetching 
+ * messages and chats, and handling real-time subscriptions.
+ */
+
 import { firebaseApp } from "../../firebase/firebaseConfig";
 import {
     getFirestore,
@@ -20,6 +28,14 @@ import { User } from "../../type/User";
 
 const db = getFirestore(firebaseApp);
 
+/**
+ * Creates a new direct message chat between two users or returns an existing one
+ * @param currentUserId - The ID of the current user
+ * @param receiverId - The ID of the user to chat with
+ * @returns Promise resolving to the DM chat ID
+ * @throws Error if the operation fails
+ */
+
 export const createDMChat = async (currentUserId: string, receiverId: string): Promise<string> => {
     try {
         const existingChat = await findExistingDMChat(currentUserId, receiverId);
@@ -39,6 +55,14 @@ export const createDMChat = async (currentUserId: string, receiverId: string): P
         throw error;
     }
 }
+
+/**
+ * Searches for an existing DM chat between two users
+ * @param userId - The ID of the first user
+ * @param user2Id - The ID of the second user
+ * @returns Promise resolving to the DMChatRef object if found, null otherwise
+ * @throws Error if the search fails
+ */
 
     export const findExistingDMChat = async (userId: string, user2Id: string): Promise<DMChatRef | null> => {
         try {
@@ -68,6 +92,13 @@ export const createDMChat = async (currentUserId: string, receiverId: string): P
         }
     };
 
+/**
+ * Retrieves all DM chats for a specific user
+ * @param userId - The ID of the user whose chats to fetch
+ * @returns Promise resolving to an array of DMChatRef objects
+ * @throws Error if the fetch operation fails
+ */
+
     export const fetchUserDMChats = async (userId: string): Promise<DMChatRef[]> => {
         try {
             const q = query(
@@ -94,6 +125,16 @@ export const createDMChat = async (currentUserId: string, receiverId: string): P
                 throw error;
             }
         };
+
+/**
+ * Sends a direct message in a specific DM chat
+ * @param dmChatId - The ID of the DM chat
+ * @param senderId - The ID of the message sender
+ * @param receiverId - The ID of the message receiver
+ * @param text - The message text content
+ * @returns Promise resolving to the new message ID
+ * @throws Error if sending the message fails
+ */
 
     export const sendDMMessage = async (dmChatId: string, senderId: string, receiverId: string, text: string): Promise<string> {
         try {
@@ -125,4 +166,119 @@ export const createDMChat = async (currentUserId: string, receiverId: string): P
             throw error;
         }
     };
+
+/**
+ * Retrieves all messages from a specific DM chat
+ * @param dmChatId - The ID of the DM chat
+ * @returns Promise resolving to an array of DMMessageRef objects
+ * @throws Error if the fetch operation fails
+ */
+
+    const fetchDMMessages = async (dmChatId: string): Promise<DMMessageRef[]> =>{
+        try {
+            const q = query(
+                collection(db, "dm_messages"),
+                where("dm_chat_id", "==", dmChatId),
+                orderBy("created_at", "asc")
+            );
+
+            const querySnapshot = await getDocs(q);
+
+            const messages: DMMessageRef[] = [];
+
+            querySnapshot.forEach((doc) => {
+                const messageData = doc.data() as DMMessage;
+                messages.push({
+                    id: doc.id,
+                    message: messageData
+                });
+                });
+
+                return messages;
+            } catch (error) {
+                console.error("Failed to fetch DM messages:", error);
+                throw error;
+            }
+        }
+
+/**
+ * Sets up a real-time listener for messages in a specific DM chat
+ * @param dmChatId - The ID of the DM chat to subscribe to
+ * @param callback - Function to call with updated messages array whenever changes occur
+ * @returns Unsubscribe function to stop listening for changes
+ */
+
+    const subscribeToDMMessages = (
+        dmChatId: string,
+        callback: (messages: DMMessageRef[]) => void
+    ) => {
+        const q = query(
+            collection(db, "dm_messages"),
+            where("dm_chat_id", "==", dmChatId),
+            orderBy("created_at", "asc")
+        );
+
+        return onSnapshot(q, (querySnapshot) => {
+            const messages: DMMessageRef[] = [];
+            querySnapshot.forEach((doc) => {
+                messages.push({
+                    id: doc.id,
+                    message: doc.data() as DMMessage
+                });
+            });
+            callback(messages);
+        })
+    }
+
+/**
+ * Marks multiple messages as read
+ * @param messageIds - Array of message IDs to mark as read
+ * @returns Promise that resolves when the operation completes
+ * @throws Error if the operation fails
+ */
+    export const markMessagesAsRead = async (messageIds: string[]): Promise<void> => {
+        try {
+            const batch = db.batch();
+
+            messageIds.forEach((id) => {
+                const messageRef = doc(db, "dm_messages", id);
+                batch.update(messageRef, { is_read: true});
+            });
+
+            await batch.commit();
+        } catch (error) {
+            console.error("Failed to mark messages as read:", error);
+            throw error;
+        }
+    };
+
+/**
+ * Sets up a real-time listener for a user's DM chats
+ * @param userId - The ID of the user whose chats to subscribe to
+ * @param callback - Function to call with updated chats array whenever changes occur
+ * @returns Unsubscribe function to stop listening for changes
+ */
+
+    export const subscribeToDMChats = (
+        userId: string,
+        callback: (chats: DMChatRef[]) => void
+    ) => {
+        const q = query(
+            collection(db, "dm_chats"),
+            where("participants", "array-contains", userId),
+            orderBy("updated_at", "desc")
+        );
+
+        return onSnapshot(q, (querySnapshot) => {
+            const chats: DMChatRef[] = [];
+            querySnapshot.forEach((doc) => {
+                chats.push({
+                    id: doc.id,
+                    chat: doc.data() as DMChat
+                });
+            });
+            callback(chats);
+        });
+    }
+    
     
