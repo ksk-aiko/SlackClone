@@ -174,7 +174,7 @@ export const createDMChat = async (currentUserId: string, receiverId: string): P
  * @throws Error if the fetch operation fails
  */
 
-    const fetchDMMessages = async (dmChatId: string): Promise<DMMessageRef[]> =>{
+    export const fetchDMMessages = async (dmChatId: string): Promise<DMMessageRef[]> =>{
         try {
             const q = query(
                 collection(db, "dm_messages"),
