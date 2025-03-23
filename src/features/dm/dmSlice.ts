@@ -94,42 +94,45 @@ export const markMessagesAsReadAsync = createAsyncThunk(
 );
 
 const dmSlice = createSlice({
-    name: "dm",
-    initialState,
-    reducers: {
-        setCurrentDMChat: (state, action) => {
-            state.currentDMChatId = action.payload;
-        },
-        addDMMessage: (state, action) => {
-            state.messages.push(action.payload);
-        },
-        updateDMChat: (state, action) => {
-            const index = state.dmChats.findIndex(chat => chat.id === action.payload.id);
-            if (index !== -1) {
-                state.dmChats[index] = action.payload;
-            }
-        },
-        setDMMessages: (state, action) => {
-            state.messages = action.payload;
-        }
+  name: "dm",
+  initialState,
+  reducers: {
+    setCurrentDMChat: (state, action) => {
+      state.currentDMChatId = action.payload;
     },
-    extraReducers: (builder) => { builder
-        .addCase(fetchDMChatsAsync.pending, (state) => {
-            state.loading = true;
-        })
-        .addCase(fetchDMChatsAsync.fulfilled, (state, action) => {
-            state.loading = false;
-            state.dmChats = action.payload;
-            state.error = null;
-        })
-        .addCase(fetchDMChatsAsync.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.error.message || "Failed to fetch DM chats";
-        })
-        .addCase(createOrGetDMChatAsync.fulfilled, (state, action) => {
-            state.currentDMChatId = action.payload.id;
-        });
-    }
+    addDMMessage: (state, action) => {
+      state.messages.push(action.payload);
+    },
+    updateDMChat: (state, action) => {
+      const index = state.dmChats.findIndex(
+        (chat) => chat.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.dmChats[index] = action.payload;
+      }
+    },
+    setDMMessages: (state, action) => {
+      state.messages = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchDMChatsAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchDMChatsAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.dmChats = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchDMChatsAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch DM chats";
+      })
+      .addCase(createOrGetDMChatAsync.fulfilled, (state, action) => {
+        state.currentDMChatId = action.payload.id;
+      });
+  },
 });
 
 export const { setCurrentDMChat, addDMMessage, updateDMChat, setDMMessages } = dmSlice.actions;

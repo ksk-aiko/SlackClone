@@ -14,11 +14,13 @@
 import {configureStore} from "@reduxjs/toolkit";
 import userReducer from "../features/users/userSlice.ts";
 import channelReducer from "../features/channel/channelSlice.ts";
+import dmReducer from "../features/dm/dmSlice.ts";
 
 export const store = configureStore({
     reducer: {
         user: userReducer,
-        channel: channelReducer
+        channel: channelReducer,
+        dm: dmReducer
     }
 })
 // Infer the `RootState` and `AppDispatch` types from the store itself
