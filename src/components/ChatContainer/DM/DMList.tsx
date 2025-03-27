@@ -6,3 +6,10 @@ import { DMChatRef } from '../../../type/DM';
 import { subscribeToDMChats } from '../../../features/dm/dmApi';
 import DMCell from './DMCell';
 import DMUserSearch from './DMUserSearch';
+
+const DMList: React.FC = () => {
+    const dispatch = useDispatch();
+    const userId = useAppSelector(state => state.user.userId);
+    const dmChats = useAppSelector(state => state.dm.dmChats);
+    const [showUserSearch, setShowUserSearch] = useState(false);
+}
