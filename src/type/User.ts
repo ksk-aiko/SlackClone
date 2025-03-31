@@ -5,6 +5,7 @@ export interface User {
     profile_picture: string;
     email: string;
     displayName: string;
+    isOnline: boolean;
 }
 
 /**
