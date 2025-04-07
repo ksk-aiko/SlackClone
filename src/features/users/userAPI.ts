@@ -90,7 +90,7 @@ export const fetchUsers = async (): Promise<UserRef[]> => {
 };
 
 // Function to search users by display name or email
-export const searchUser = async (searchTerm: string): Promise<UserRef[]> => {
+export const searchUsers = async (searchTerm: string): Promise<UserRef[]> => {
   try {
     if (!searchTerm.trim()) {
       return await fetchUsers();

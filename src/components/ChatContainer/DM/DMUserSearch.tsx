@@ -63,20 +63,22 @@ const DMUserSearch: React.FC<DMUserSearchProps> = ({ onClose }) => {
     }, [currentUserId]);
 
     useEffect(() => {
+        // Filter users based on search term
+        const filterUsers = async () => {
+            if (searchTerm.trim() === '') {
+                setFilteredUsers(users);
+            } else {
+                try {
+                    const filteredList = await searchUsers(searchTerm);
+                    setFilteredUsers(filteredList);
+                } catch (err) {
+                    setError('Failed to search users. Please try again.');
+                    console.error('Error searching users:', err);
+                }
+            }
+        };
 
-        // Filter users based on the search term
-        if (searchTerm.trim() === '') {
-            setFilteredUsers(users);
-        } else {
-            const filtered = users.filter(userRef => {
-                const user = userRef.user;
-                return (
-                    user.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    user.email.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-            });
-            setFilteredUsers(filtered);
-        }
+        filterUsers();
     }, [searchTerm, users]);
 
     // Handle search input change
