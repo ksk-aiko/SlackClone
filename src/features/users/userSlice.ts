@@ -9,13 +9,24 @@
 
 
  
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {signInWithGoogle} from '../auth/Auth.ts';
-import {getUser, postUser} from './userAPI.ts';
-import {User} from '../../type/User.ts';
+import {getUser, postUser, fetchUsers } from './userAPI.ts';
+import {User, UserRef} from '../../type/User.ts';
+import { create } from '@mui/material/styles/createTransitions.js';
 
-const initialState = {
-    userId: ""
+interface UserState {
+    userId: string;
+    users: UserRef[];
+    loading: boolean;
+    error: string | null;
+}
+
+const initialState: UserState = {
+    userId: "",
+    users: [],
+    loading: false,
+    error: null,
 }
 
 /**
@@ -46,6 +57,13 @@ export const googleSignInAndUserSetup = async () => {
 }
 }
 
+export const fetchUsersAsync = createAsyncThunk(
+    'users/fetchUsers',
+    async () => {
+        return await fetchUsers();
+    }
+);
+
 /**
  * Slice to manage user IDs.
  *
@@ -65,6 +83,21 @@ const userSlice = createSlice({
         logout: (state) => {
             state.userId = "";
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchUsersAsync.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchUsersAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.users = action.payload;
+            })
+            .addCase(fetchUsersAsync.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || 'Failed to load users';
+            });
     }
 })
 
