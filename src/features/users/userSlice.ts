@@ -45,6 +45,7 @@ export const googleSignInAndUserSetup = async () => {
                 profile_picture: login_user.photoURL ?? "",
                 email: login_user.email ?? "",
                 displayName: login_user.displayName ?? "",
+                isOnline: true,
             }
             await postUser({
                 uid: login_user.uid,

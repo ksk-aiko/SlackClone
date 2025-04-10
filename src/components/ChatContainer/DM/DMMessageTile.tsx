@@ -38,7 +38,7 @@ const DMMessageTile: React.FC<DMMessageTileProps> = ({ messageRef }) => {
 
     return (
         <div className={`flex mb-4 ${isCurrentUser ? 'justify-end' : 'justify-start'}`}>
-            <div className={`flex ${isCurrentUser ? 'flex-row-revers' : 'flex-row'} max-w-[80%]`}>
+            <div className={`flex ${isCurrentUser ? 'flex-row-reverse' : 'flex-row'} max-w-[80%]`}>
                 {!isCurrentUser && (
                     <div className="mr-2">
                         <Avatar
