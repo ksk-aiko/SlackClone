@@ -81,7 +81,8 @@ export const createOrGetDMChatAsync = createAsyncThunk(
         currentUserId: string,
         receiverId: string
     }) => {
-        return await createDMChat(currentUserId, receiverId);
+      const chatId = await createDMChat(currentUserId, receiverId);
+      return {id: chatId};
     }
 );
 
