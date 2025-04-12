@@ -72,8 +72,8 @@ const DMMessageArea: React.FC = () => {
                     </div>
                 ) : (
                     messages.map((messageRef: DMMessageRef) => (
-                        <DMMessageTiel 
-                            kye={messageRef.id}
+                        <DMMessageTile 
+                            key={messageRef.id}
                             messageRef={messageRef}
                         />  
                     ))

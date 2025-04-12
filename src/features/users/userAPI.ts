@@ -64,6 +64,7 @@ export const postUser = async (userRef: UserRef) => {
     displayName: user.displayName,
     email: user.email,
     profile_picture: user.profile_picture,
+    isOnline: userRef.user.isOnline ?? true
   });
 };
 
