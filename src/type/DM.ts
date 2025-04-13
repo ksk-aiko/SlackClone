@@ -73,4 +73,5 @@ export interface DMMessageRef {
 export interface DMChatRef {
     id: string;
     chat: DMChat;
+    hasUnread?: boolean;
 }

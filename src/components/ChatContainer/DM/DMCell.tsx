@@ -50,7 +50,7 @@ interface DMCellProps {
 
         // Handle selecting a DM chat
         const handleSelectDM = () => {
-            dispatch(setCurrentDMChat(chatRef));
+            dispatch(setCurrentDMChat(chatRef.id));
             dispatch(fetchDMMessagesAsync(chatRef.id));
         }
 

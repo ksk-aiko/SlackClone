@@ -91,12 +91,12 @@ const DMUserSearch: React.FC<DMUserSearchProps> = ({ onClose }) => {
         if (!currentUserId) return;
 
         try {
-            const dmChatId = await dispatch(createOrGetDMChatAsync({
+            const result = await dispatch(createOrGetDMChatAsync({
                 currentUserId,
                 receiverId: userRef.uid
             })).unwrap();
 
-            dispatch(setCurrentDMChat(dmChatId));
+            dispatch(setCurrentDMChat(result.id));
 
             onClose();
         } catch (error) {
