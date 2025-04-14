@@ -1,4 +1,4 @@
-import {firebaseApp} from '../../firebase/firebaseConfig.ts';
+import {firebaseApp} from '../../firebase/firebaseConfig';
 import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 
 export const auth = getAuth(firebaseApp);

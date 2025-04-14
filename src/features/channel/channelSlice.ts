@@ -4,14 +4,19 @@
  */
 
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import { updateChannel, deleteChannel} from './channelAPI.ts';
+import { updateChannel, deleteChannel} from './channelAPI';
 
 const initialState = {
     /**
      * The ID of the currently selected channel.
      * @type {string}
      */
-    currentChannelId: ''
+    currentChannelId: '',
+    // /**
+    //  * The status of the async operations (e.g., 'idle', 'loading', 'failed').
+    //  * @type {string}
+    //  */
+    status: 'idle'
 }
 
 /**

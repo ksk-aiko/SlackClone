@@ -28,8 +28,8 @@ import {
     updateDoc,
     deleteDoc
 } from "firebase/firestore";
-import { firebaseApp } from "../../firebase/firebaseConfig.ts";
-import { Channel, ChannelRef} from "../../type/Channel.ts";
+import { firebaseApp } from "../../firebase/firebaseConfig";
+import { Channel, ChannelRef} from "../../type/Channel";
 
 const db = getFirestore(firebaseApp); 
 

@@ -14,8 +14,8 @@
  * @returns {JSX.Element} The rendered MessageMenu component
  */
 
-import { React, FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { FC, useState } from 'react';
+import { useAppDispatch } from '../../../app/hook';
 import { 
   Menu, 
   MenuItem, 
@@ -28,7 +28,7 @@ import {
   Button 
 } from '@mui/material';
 import { MoreVert as MoreVertIcon } from '@mui/icons-material';
-import { updateMessageAsync, deleteMessageAsync } from '../../../features/message/messageSlice.ts';
+import { updateMessageAsync, deleteMessageAsync } from '../../../features/message/messageSlice';
 
 interface MessageMenuProps {
   messageId: string;
@@ -36,7 +36,7 @@ interface MessageMenuProps {
 }
 
 export const MessageMenu: FC<MessageMenuProps> = ({ messageId, messageText }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);

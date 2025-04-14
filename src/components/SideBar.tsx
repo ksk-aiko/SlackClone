@@ -25,10 +25,10 @@
  */
 import React, { useEffect, useState} from 'react';
 import {Home, ChatBubble} from "@mui/icons-material";
-import { useAppSelector} from '../app/hook.ts';
-import { getUser } from '../features/users/userAPI.ts';
-import { User } from '../type/User.ts';
-import {signOut} from "../features/auth/Auth.ts"
+import { useAppSelector} from '../app/hook';
+import { getUser } from '../features/users/userAPI';
+import { User } from '../type/User';
+import {signOut} from "../features/auth/Auth"
 
 const SideBar = () => {
 

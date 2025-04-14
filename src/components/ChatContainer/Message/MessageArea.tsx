@@ -1,4 +1,3 @@
-// TODO: fix textarea styling
 /**
  * MessageArea component is responsible for rendering the chat interface.
  * It allows users to type and send messages, and displays the list of messages in the current channel.
@@ -27,10 +26,10 @@
 import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 import { TextareaAutosize } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import {MessageRef} from "../../../type/Message.ts";
-import {useAppSelector} from "../../../app/hook.ts";
-import {createMessage, subscribeMessages, postMessage} from "../../../features/message/messageAPI.ts";
-import MessageTile from "./MessageTile.tsx";
+import {MessageRef} from "../../../type/Message";
+import {useAppSelector} from "../../../app/hook";
+import {createMessage, subscribeMessages, postMessage} from "../../../features/message/messageAPI";
+import MessageTile from "./MessageTile";
 
 const MessageArea = () => {
   // State to hold the list of message references

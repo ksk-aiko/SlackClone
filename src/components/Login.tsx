@@ -12,8 +12,8 @@
  */
 
 import React from 'react';
-import {useAppDispatch} from '../app/hook.ts';
-import { googleSignInAndUserSetup, login } from '../features/users/userSlice.ts';
+import {useAppDispatch} from '../app/hook';
+import { googleSignInAndUserSetup, login } from '../features/users/userSlice';
 
 
 const Login = () => {

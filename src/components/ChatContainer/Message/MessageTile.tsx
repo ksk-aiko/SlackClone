@@ -22,10 +22,10 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {User} from "../../../type/User.ts";
-import {Message} from "../../../type/Message.ts";
-import {getUser} from "../../../features/users/userAPI.ts"
-import {MessageMenu} from "./MessageMenu.tsx";
+import {User} from "../../../type/User";
+import {Message} from "../../../type/Message";
+import {getUser} from "../../../features/users/userAPI"
+import {MessageMenu} from "./MessageMenu";
 
 // this interface is used to define the props that are passed to the MessageTile component
 interface MessageTileProps {

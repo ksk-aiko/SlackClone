@@ -15,8 +15,8 @@
  */
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { auth } from './Auth.ts';
-import { login, logout } from '../users/userSlice.ts';
+import { auth } from './Auth';
+import { login, logout } from '../users/userSlice';
 
 const useAuthState = () => {
     const dispatch = useDispatch();

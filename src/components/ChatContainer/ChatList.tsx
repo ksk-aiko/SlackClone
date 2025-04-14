@@ -14,11 +14,11 @@
  * @returns {JSX.Element} The rendered ChatList component.
  */
 import React, { useEffect, useState } from "react";
-import { subscribeChannels } from '../../features/channel/channelAPI.ts';
-import { ChannelRef } from '../../type/Channel.ts';
-import ChannelCell from './Channel/ChannelCell.tsx';
-import ChannelAddModal from "./Channel/ChannelAddModal.tsx";
-import { WorkplaceManagement } from '../../features/workplace/components/WorkplaceManagement.tsx';
+import { subscribeChannels } from '../../features/channel/channelAPI';
+import { ChannelRef } from '../../type/Channel';
+import ChannelCell from './Channel/ChannelCell';
+import ChannelAddModal from "./Channel/ChannelAddModal";
+import { WorkplaceManagement } from '../../features/workplace/components/WorkplaceManagement';
 
 const ChatList = () => {
   // State to store the list of channel references
