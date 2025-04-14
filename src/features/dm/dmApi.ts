@@ -21,7 +21,8 @@ import {
     serverTimestamp,
     onSnapshot,
     Timestamp,
-    DocumentReference
+    DocumentReference,
+    writeBatch
 } from "firebase/firestore";
 import { DMChat, DMMessage, DMMessageRef, DMChatRef } from "../../type/DM";
 import { User } from "../../type/User";
@@ -238,7 +239,7 @@ export const createDMChat = async (currentUserId: string, receiverId: string): P
  */
     export const markMessagesAsRead = async (messageIds: string[]): Promise<void> => {
         try {
-            const batch = db.batch();
+            const batch = writeBatch(db);
 
             messageIds.forEach((id) => {
                 const messageRef = doc(db, "dm_messages", id);
