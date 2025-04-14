@@ -136,7 +136,7 @@ export const createDMChat = async (currentUserId: string, receiverId: string): P
  * @throws Error if sending the message fails
  */
 
-    export const sendDMMessage = async (dmChatId: string, senderId: string, receiverId: string, text: string): Promise<string> {
+    export const sendDMMessage = async (dmChatId: string, senderId: string, receiverId: string, text: string): Promise<string> => {
         try {
             const messageData: DMMessage = {
                 user_id: senderId,

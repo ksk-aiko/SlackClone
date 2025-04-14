@@ -22,7 +22,7 @@ export const formatMessageTime = (timestamp: any): string => {
 
     if (timestamp && typeof timestamp.toDate === 'function') {
         date = timestamp.toDate();
-    } elseif (timestamp instanceof Date) {
+    } else if (timestamp instanceof Date) {
         date = timestamp;
     } else {
         date = new Date(timestamp);
