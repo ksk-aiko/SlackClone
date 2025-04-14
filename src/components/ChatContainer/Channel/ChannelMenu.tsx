@@ -39,7 +39,7 @@
  */
 
 import React, { FC, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../../app/hook"
 import {
   Menu,
   MenuItem,
@@ -66,7 +66,7 @@ export const ChannelMenu: FC<ChannelMenuProps> = ({
 }) => {
 
   // Initialize the dispatch function and state variables.
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
