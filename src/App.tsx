@@ -13,11 +13,12 @@
  */
 import React from 'react';
 import './App.css';
-import SideBar from "./components/SideBar.tsx";
-import ChatContainer from "./components/ChatContainer.tsx";
-import Login from './components/Login.tsx';
-import { useAppSelector } from './app/hook.ts';
-import useAuthState from "./features/auth/useAuthState.tsx";
+import SideBar from "./components/SideBar";
+import ChatContainer from "./components/ChatContainer";
+import Login from './components/Login';
+import { useAppSelector } from './app/hook';
+import useAuthState from "./features/auth/useAuthState";
+import { RootState } from './app/store'
 
 function App() {
   // Get the user authentication state

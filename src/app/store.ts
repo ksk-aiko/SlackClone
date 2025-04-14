@@ -12,9 +12,9 @@
  * @typedef {ReturnType<typeof store.getState>} RootState - The root state type inferred from the store.
  */
 import {configureStore} from "@reduxjs/toolkit";
-import userReducer from "../features/users/userSlice.ts";
-import channelReducer from "../features/channel/channelSlice.ts";
-import dmReducer from "../features/dm/dmSlice.ts";
+import userReducer from "../features/users/userSlice";
+import channelReducer from "../features/channel/channelSlice";
+import dmReducer from "../features/dm/dmSlice";
 
 export const store = configureStore({
     reducer: {

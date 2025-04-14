@@ -13,10 +13,10 @@
  * return <ChannelCell channel={channel} id={id} />;
  */
 import React from 'react';
-import {useAppDispatch} from "../../../app/hook.ts";
-import {selectChannel} from "../../../features/channel/channelSlice.ts";
-import {Channel} from "../../../type/Channel.ts";
-import {ChannelMenu} from "./ChannelMenu.tsx";
+import {useAppDispatch} from "../../../app/hook";
+import {selectChannel} from "../../../features/channel/channelSlice";
+import {Channel} from "../../../type/Channel";
+import {ChannelMenu} from "./ChannelMenu";
 
 type Props = {
     channel: Channel

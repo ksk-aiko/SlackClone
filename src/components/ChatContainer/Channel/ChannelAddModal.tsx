@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import {createChannel, postChannel} from "../../../features/channel/channelAPI.ts";
+import {createChannel, postChannel} from "../../../features/channel/channelAPI";
 
 type Props = {handleCloseModal: () => void};
 

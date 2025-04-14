@@ -38,7 +38,7 @@
  * @description Updates the new channel name state.
  */
 
-import { React, FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   Menu,
@@ -53,7 +53,7 @@ import {
 import {
   updateChannelAsync,
   deleteChannelAsync,
-} from "../../../features/channel/channelSlice.ts";
+} from "../../../features/channel/channelSlice";
 
 interface ChannelMenuProps {
   channelId: string;
