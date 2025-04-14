@@ -14,9 +14,9 @@
  * ```
  */
 import React, { useState } from 'react';
-import { Workplace } from '../types/workplace.ts';
-import { WorkplaceList } from './WorkplaceList.tsx';
-import { CreateWorkplaceModal } from './CreateWorkplaceModal.tsx';
+import { Workplace } from '../types/workplace';
+import { WorkplaceList } from './WorkplaceList';
+import { CreateWorkplaceModal } from './CreateWorkplaceModal';
 
 export const WorkplaceManagement: React.FC = () => {
     const [selectedWorkplace, setSelectedWorkplace] = useState<Workplace | null>(null);

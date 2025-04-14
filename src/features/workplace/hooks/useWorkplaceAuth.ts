@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from './useAuth.ts';
-import { workplaceApi } from '../api/workplaceApi.ts';
-import { Workplace } from '../types/workplace.ts';
+import { useAuth } from './useAuth';
+import { workplaceApi } from '../api/workplaceApi';
+import { Workplace } from '../types/workplace';
 
 /**
  * Custom React hook that fetches and manages workplace data.

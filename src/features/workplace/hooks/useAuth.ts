@@ -14,7 +14,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { firebaseApp } from '../../../firebase/firebaseConfig.ts';
+import { firebaseApp } from '../../../firebase/firebaseConfig';
 import { getAuth } from 'firebase/auth';
 import { User } from 'firebase/auth';
 

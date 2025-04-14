@@ -27,7 +27,7 @@
       "@firebase/*": ["firebase/*"],
       "@app/*": ["app/*"],
       "@type/*": ["type/*"]
-    }
+    },
   },
   "include": [
     "src/**/*.ts",

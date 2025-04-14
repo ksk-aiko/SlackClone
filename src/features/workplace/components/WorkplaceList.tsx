@@ -1,6 +1,6 @@
 import React from 'react';
-import { useWorkplaces } from '../hooks/useWorkplaceAuth.ts';
-import { Workplace } from '../types/workplace.ts';
+import { useWorkplaces } from '../hooks/useWorkplaceAuth';
+import { Workplace } from '../types/workplace';
 
 interface WorkplaceListProps {
     onSelectWorkplace: (workplace: Workplace) => void;
