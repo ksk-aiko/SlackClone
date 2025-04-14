@@ -19,9 +19,9 @@
  */
 
 import { getFirestore, collection, doc, setDoc, getDoc, getDocs, query, where} from "firebase/firestore";
-import { Workplace } from '../types/workplace.ts';
-import { firebaseApp } from '../../../firebase/firebaseConfig.ts';
-import { WorkplaceMember } from '../types/workplace.ts';
+import { Workplace } from '../types/workplace';
+import { firebaseApp } from '../../../firebase/firebaseConfig';
+import { WorkplaceMember } from '../types/workplace';
 
 const db = getFirestore(firebaseApp);
 

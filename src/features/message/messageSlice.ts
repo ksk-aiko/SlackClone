@@ -4,7 +4,7 @@
  */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { updateMessage, deleteMessage } from './messageAPI.ts';
+import { updateMessage, deleteMessage } from './messageAPI';
 
 // Define a type for the slice state
 interface MessageState {

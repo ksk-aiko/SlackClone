@@ -10,9 +10,9 @@
 
  
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {signInWithGoogle} from '../auth/Auth.ts';
-import {getUser, postUser, fetchUsers } from './userAPI.ts';
-import {User, UserRef} from '../../type/User.ts';
+import {signInWithGoogle} from '../auth/Auth';
+import {getUser, postUser, fetchUsers } from './userAPI';
+import {User, UserRef} from '../../type/User';
 import { create } from '@mui/material/styles/createTransitions.js';
 
 interface UserState {

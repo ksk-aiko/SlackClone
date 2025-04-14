@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Timestamp } from 'firebase/firestore';
-import { workplaceApi} from '../api/workplaceApi.ts';
-import { useAuth } from '../hooks/useAuth.ts';
+import { workplaceApi} from '../api/workplaceApi';
+import { useAuth } from '../hooks/useAuth';
+import { WorkplaceRole } from '../types/workplace';
 
 interface CreateWorkplaceModalProps {
     isOpen: boolean;
@@ -56,7 +57,7 @@ export const CreateWorkplaceModal: React.FC<CreateWorkplaceModalProps> = ({
             await workplaceApi.addMember({
                 workplace_id: workplaceId,
                 user_id: user.uid,
-                role: 'owner',
+                role: 'owner' as WorkplaceRole,
                 joined_at: now
             });
 

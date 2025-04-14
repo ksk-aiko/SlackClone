@@ -29,7 +29,7 @@
  * @property {TimeStamp} joined_at - Timestamp when the member joined the workplace
  */
 
-import { TimeStamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 export enum WorkplaceRole {
     OWNER = 'owner',
@@ -42,8 +42,8 @@ export interface Workplace {
     id: string;
     name: string;
     description?: string;
-    created_at: TimeStamp;
-    updated_at: TimeStamp;
+    created_at: Timestamp;
+    updated_at: Timestamp;
     owner_id: string;
     icon_url?: string;
 }
@@ -52,5 +52,6 @@ export interface WorkplaceMember {
     workplace_id: string;
     user_id: string;
     role: WorkplaceRole;
-    joined_at: TimeStamp;
+    joined_at: Timestamp;
 }
+

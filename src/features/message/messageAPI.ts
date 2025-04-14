@@ -1,6 +1,6 @@
 import {getFirestore, query, collection, where, addDoc, onSnapshot, Timestamp} from "firebase/firestore";
-import {firebaseApp} from "../../firebase/firebaseConfig.ts";
-import {Message, MessageRef} from "../../type/Message.ts";
+import {firebaseApp} from "../../firebase/firebaseConfig";
+import {Message, MessageRef} from "../../type/Message";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 const db = getFirestore(firebaseApp);

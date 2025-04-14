@@ -40,7 +40,7 @@ import {
   getFirestore,
   collection,
 } from "firebase/firestore";
-import { firebaseApp } from "../../firebase/firebaseConfig.ts";
+import { firebaseApp } from "../../firebase/firebaseConfig";
 import { User, UserRef } from "../../type/User";
 
 // Obtain an instance of the Firestore database
