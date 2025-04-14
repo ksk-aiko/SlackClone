@@ -28,6 +28,8 @@ const DMMessageArea: React.FC = () => {
     const currentDMChatId = useAppSelector((state) => state.dm.currentDMChatId);
     const messages = useAppSelector((state) => state.dm.messages);
 
+    // Fetch messages when the current DM chat ID changes
+    // This effect runs when the component mounts and whenever the currentDMChatId changes
     useEffect(() => {
         if (currentDMChatId) {
             dispatch(fetchDMMessagesAsync(currentDMChatId));
@@ -42,6 +44,8 @@ const DMMessageArea: React.FC = () => {
         );
     }
 
+    // Handle sending messages
+    // This function is called when the user clicks the send button or presses Ctrl/Cmd + Enter
     const handleSendMessage = async () => {
         if (!message.trim() || !currentUserId || !currentDMChatId) return;
         
@@ -63,8 +67,15 @@ const DMMessageArea: React.FC = () => {
     }
 };
 
+ const handleKeyDown = (e: React.KeyboardEvent) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        handleSendMessage();
+    }
+ }
+
     return (
         <div className="flex flex-1 flex-col bg-gray-700 text-white">
+            {/* // Area for displaying messages */}
             <div className="p-4 flex-1 overflow-auto">
                 {messages.length === 0 ? (
                     <div className="text-center py-6 text-gray-400">
@@ -80,6 +91,7 @@ const DMMessageArea: React.FC = () => {
                 )}
             </div>
 
+            {/* // Area for sending messages */}
             <div className="p-4 border-t border-gray-600">
                 <div className="flex items-center">
                     <TextareaAutosize 
@@ -89,11 +101,7 @@ const DMMessageArea: React.FC = () => {
                         maxRows={5}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        onKeyDown={(e) => {
-                            if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-                                handleSendMessage();
-                            }
-                        }}
+                        onKeyDown={handleKeyDown}
                     />
                     <button
                         className="ml-2 p-2 bg-blue-500 rounded hover:bg-blue-600 disabled:opacity-50"
