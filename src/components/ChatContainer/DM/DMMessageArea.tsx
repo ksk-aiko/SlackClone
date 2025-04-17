@@ -18,8 +18,9 @@ import { useAppSelector, useAppDispatch } from '../../../app/hook';
 import { DMMessageRef } from '../../../type/DM';
 import {TextareaAutosize } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import { fetchDMMessagesAsync, sendMessageAsync} from '../../../features/dm/dmSlice';
+import { fetchDMMessagesAsync, sendMessageAsync, setDMMessages} from '../../../features/dm/dmSlice';
 import DMMessageTile from './DMMessageTile';
+import { subscribeToDMMessages } from '../../../features/dm/dmApi'
 
 const DMMessageArea: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -33,8 +34,15 @@ const DMMessageArea: React.FC = () => {
     useEffect(() => {
         if (currentDMChatId) {
             dispatch(fetchDMMessagesAsync(currentDMChatId));
+
+            const unsubscribe = subscribeToDMMessages(currentDMChatId, (messages) => {
+                dispatch(setDMMessages(messages));
+            });
+
+            return () => unsubscribe();
         }
     }, [currentDMChatId, dispatch]);
+
 
     if (!currentDMChatId) {
         return (

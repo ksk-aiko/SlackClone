@@ -209,7 +209,7 @@ export const createDMChat = async (currentUserId: string, receiverId: string): P
  * @returns Unsubscribe function to stop listening for changes
  */
 
-    const subscribeToDMMessages = (
+    export const subscribeToDMMessages = (
         dmChatId: string,
         callback: (messages: DMMessageRef[]) => void
     ) => {
