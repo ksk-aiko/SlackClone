@@ -18,7 +18,7 @@ import { useAppSelector, useAppDispatch } from '../../../app/hook';
 import { DMMessageRef } from '../../../type/DM';
 import {TextareaAutosize } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import { fetchDMMessagesAsync, sendMessageAsync, setDMMessages} from '../../../features/dm/dmSlice';
+import { fetchDMMessagesAsync, sendMessageAsync, markMessagesAsReadAsync, setDMMessages} from '../../../features/dm/dmSlice';
 import DMMessageTile from './DMMessageTile';
 import { subscribeToDMMessages } from '../../../features/dm/dmApi'
 
@@ -42,6 +42,21 @@ const DMMessageArea: React.FC = () => {
             return () => unsubscribe();
         }
     }, [currentDMChatId, dispatch]);
+
+    useEffect(() => {
+        if (currentDMChatId && messages.length > 0 && currentUserId) {
+            const unreadMessages = messages
+                .filter(msg => 
+                    !msg.message.is_read &&
+                    msg.message.user_id !== currentUserId
+                )
+                .map(msg => msg.id);
+
+                if (unreadMessages.length > 0) {
+                    dispatch(markMessagesAsReadAsync(unreadMessages))
+                }
+        }
+    }, [currentDMChatId, messages, currentUserId, dispatch]);
 
 
     if (!currentDMChatId) {
