@@ -112,15 +112,28 @@ export const createDMChat = async (currentUserId: string, receiverId: string): P
 
             const dmChats: DMChatRef[] = [];
 
-            querySnapshot.forEach((doc) => {
-                    const chatData = doc.data() as DMChat;
-                    dmChats.push({
-                        id: doc.id,
-                        chat: chatData
-                    });
-                });
+            for (const docSnap of querySnapshot.docs) {
+                const chatData = docSnap.data() as DMChat;
 
-                return dmChats;
+                const unreadQuery = query(
+                    collection(db, "dm_messages"),
+                    where("dm_chat_id", "==", docSnap.id),
+                    where("user_id", "!=", userId),
+                    where("is_read", "==", false)
+                );
+
+                const unreadSnapshot = await getDocs(unreadQuery);
+                const hasUnread = !unreadSnapshot.empty;
+
+                dmChats.push( {
+                    id: docSnap.id,
+                    chat: chatData,
+                    hasUnread: hasUnread
+                });
+            }
+
+            return dmChats;
+
             } catch (error) {
                 console.error("Failed to fetch user DM chats:", error);
                 throw error;
