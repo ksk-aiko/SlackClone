@@ -132,7 +132,29 @@ const dmSlice = createSlice({
       })
       .addCase(createOrGetDMChatAsync.fulfilled, (state, action) => {
         state.currentDMChatId = action.payload.id;
-      });
+      })
+      .addCase(markMessagesAsReadAsync.fulfilled, (state, action) => {
+        const messageIds = action.payload;
+
+        state.messages = state.messages.map(msg => {
+          if (messageIds.includes(msg.id)) {
+            return {
+              ...msg,
+              message: {...msg.message, is_read: true }
+            };
+          }
+          return msg;
+
+        });
+        
+          if (state.currentDMChatId) {
+            const chatIndex = state.dmChats.findIndex(chat => chat.id === state.currentDMChatId);
+            if (chatIndex !== -1) {
+              state.dmChats[chatIndex].hasUnread = false;
+            }
+          }
+
+      })
   },
 });
 
