@@ -76,7 +76,7 @@ interface DMCellProps {
                className={`px-4 py-2 cursor-pointer flex items-center ${isActive ? 'bg-blue-700' : 'hover:bg-gray-700'}`} 
                onClick={handleSelectDM}
             >
-                <div className="relative mr-2">
+            <div className="relative mr-2">
                     {otherUser.profile_picture ? (
                         <img
                             src={otherUser.profile_picture}
@@ -99,7 +99,7 @@ interface DMCellProps {
             
             {/* Show unread indicator if there are unread messages */}
             {chatRef.hasUnread && !isActive && (
-                <div className="w-2 h-2 ml-auto bg-blue-500 rounder-full"></div>
+                <div className="w-2 h-2 ml-auto bg-blue-500 rounded-full"></div>
             )}
         </div>
         )

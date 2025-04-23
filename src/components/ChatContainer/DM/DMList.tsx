@@ -44,6 +44,7 @@ const DMList: React.FC = () => {
     }
   }, [userId, dispatch]);
 
+
   // Function to handle the new message button click
   const handleNewChat = () => {
     setShowUserSearch(true);
