@@ -18,7 +18,7 @@ import ChatContainer from "./components/ChatContainer";
 import Login from './components/Login';
 import { useAppSelector } from './app/hook';
 import useAuthState from "./features/auth/useAuthState";
-import { RootState } from './app/store'
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
   // Get the user authentication state
@@ -27,18 +27,20 @@ function App() {
   // Get the user ID from the Redux store
   const userId = useAppSelector((state) => state.user.userId);
 
+  if (!userId) {
+    return <Login />;
+  }
+
   return (
     <div className="flex">
-      {userId ? (
-        <>
-        <SideBar />
-        <ChatContainer />
-        </>
-      ) : (
-        <Login />
-      )}
+      <SideBar />
+      <Routes>
+        <Route path="/" element={<ChatContainer />} />
+        <Route path="/dm" element={<ChatContainer type="dm" />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
-  );
+  )
 }
 
 export default App;

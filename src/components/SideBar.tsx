@@ -29,11 +29,15 @@ import { useAppSelector} from '../app/hook';
 import { getUser } from '../features/users/userAPI';
 import { User } from '../type/User';
 import {signOut} from "../features/auth/Auth"
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const SideBar = () => {
 
   // Fetch the userId from the Redux store
   const userId = useAppSelector((state) => state.user.userId);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Initialize the user state
   const [user, setUser] = useState<User | null>();
@@ -52,15 +56,20 @@ const SideBar = () => {
     fetchUser();
   }, [userId]);
 
+  const isHomePage = location.pathname === '/';
+  const isDMPage = location.pathname === '/dm';
+
   return (
     <div className="w-16 h-screen bg-gray-900 text-white">
       <div className="py-5 flex flex-col items-center">
-        <div className="bg-gray-700 p-2 rounded-lg">
+        <div className={`bg-gray-700 p-2 rounded-lg cursor-pointer hover:bg-Gray-600 ${isHomePage ? 'ring-2 ring-blue-500' : ''}`} 
+        onClick={() => navigate('/')}>
           <Home/>
         </div>
       </div>
       <div className="py-5 flex flex-col items-center">
-        <div className="bg-gray-700 p-2 rounded-lg">
+        <div className={`bg-gray-700 p-2 rounded-lg cursor-pointer hover:bg-Gray-600 ${isDMPage ? 'ring-2 ring-blue-500' : ''}`}
+        onClick={() => navigate('/dm')}>
           <ChatBubble/>
         </div>
         <span className="text-xs">DM</span>
