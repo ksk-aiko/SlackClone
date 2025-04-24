@@ -1,4 +1,4 @@
-import {getFirestore, query, collection, where, addDoc, onSnapshot, Timestamp} from "firebase/firestore";
+import {getFirestore, query, collection, where, orderBy, addDoc, onSnapshot, Timestamp} from "firebase/firestore";
 import {firebaseApp} from "../../firebase/firebaseConfig";
 import {Message, MessageRef} from "../../type/Message";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
@@ -15,7 +15,12 @@ const db = getFirestore(firebaseApp);
 
 export const subscribeMessages = (channelId: string, onMessageUpdated: (messages: MessageRef[]) => void) => {
     // Get documents with matching channelId from the Firestore's messages collection
-    const q = query(collection(db, "messages"), where("channel_id", "==", channelId));
+    // and order them by create_at in ascending order
+    const q = query(
+      collection(db, "messages"),
+      where("channel_id", "==", channelId),
+      orderBy("create_at", "asc")
+      );
 
     // Subscribe to the query
     return onSnapshot(q, (querySnapshot) => {
