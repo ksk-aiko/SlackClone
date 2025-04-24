@@ -17,6 +17,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { auth } from './Auth';
 import { login, logout } from '../users/userSlice';
+import { updateUser } from '../users/userAPI';
 
 const useAuthState = () => {
     const dispatch = useDispatch();
@@ -26,6 +27,16 @@ const useAuthState = () => {
         const unsubscribe = auth.onAuthStateChanged((loginUser) => {
             if (loginUser) {
                 dispatch(login(loginUser.uid));
+                // FirestoreのUserコレクションを更新
+                updateUser({
+                    uid: loginUser.uid,
+                    user: {
+                        displayName: loginUser.displayName ?? '',
+                        email: loginUser.email ?? '',
+                        profile_picture: loginUser.photoURL ?? '',
+                        isOnline: true
+                    }
+                });
             } else {
                 dispatch(logout());
             }

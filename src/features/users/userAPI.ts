@@ -68,6 +68,16 @@ export const postUser = async (userRef: UserRef) => {
   });
 };
 
+export const updateUser = async (userRef: UserRef) => {
+  const user = userRef.user;
+  await setDoc(doc(db, "users", userRef.uid), {
+    displayName: user.displayName,
+    email: user.email,
+    profile_picture: user.profile_picture,
+    isOnline: user.isOnline ?? true
+  }, { merge: true });
+};
+
 // Function to fetch all users
 export const fetchUsers = async (): Promise<UserRef[]> => {
   try {
