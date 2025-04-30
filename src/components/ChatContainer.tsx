@@ -15,34 +15,39 @@
  * showing either channel-related components or direct message components depending on the active tab.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ChatList from "./ChatContainer/ChatList";
 import MessageArea from "./ChatContainer/Message/MessageArea";
 import DMList from "./ChatContainer/DM/DMList"
 import DMMessageAria from "./ChatContainer/DM/DMMessageArea"
 
-const ChatContainer = () => {
-  const [activeTab, setActiveTab] = useState<'channels' | 'directMessages'>('channels');
+type ChatContainerProps = {
+  type?: 'dm';
+}
+
+const ChatContainer: React.FC<ChatContainerProps> = ({type}) => {
+  const location = useLocation();
+  const [activeMode, setActiveMode] = useState<'channels' | 'directMessages'>(type === 'dm' || location.pathname === '/dm' ? 'directMessages' : 'channels')
+
+  useEffect(() => {
+    if (type === 'dm' || location.pathname === '/dm') {
+      setActiveMode('directMessages');
+    } else {
+      setActiveMode('channels');
+    }
+  }, [location.pathname, type]);
 
   return (
     <div className="flex flex-col flex-grow h-screen">
       <div className="bg-gray-800 text-white flex border-b border-gray-700">
-        <button
-          className={`py-2 px-4 ${activeTab === 'channels' ? 'bg-gray-700' : ''}`}
-          onClick={() => setActiveTab('channels')}
-        >
-          Channels
-        </button>
-        <button
-          className={`py-2 px-4 ${activeTab === 'directMessages' ? 'bg-gray-700' : ''}`}
-          onClick={() => setActiveTab('directMessages')}
-        >
-          Direct Messages
-        </button>
+        <div className="py-2 px-4 font-medium">
+          {activeMode === 'channels' ? 'Channels' : 'Direct Messages'}
+        </div>
       </div>
 
       <div className="flex flex-grow">
-        {activeTab === 'channels' ? (
+        {activeMode === 'channels' ? (
           <>
             <ChatList />
             <MessageArea />
