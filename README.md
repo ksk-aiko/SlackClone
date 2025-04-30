@@ -1,36 +1,45 @@
 # SlackClone
 
 ## 概要
-SlackCloneは、Slackのようなメッセージングアプリケーションを模倣したプロジェクトです。チーム内のコミュニケーションを円滑にし、リアルタイムでのメッセージ交換が可能です。
+SlackCloneは、Slackのようなメッセージングアプリケーションを模倣したプロジェクトです。Firebaseを活用したリアルタイムチャット機能と、React/TypeScriptベースのモダンなUI/UXを提供します。
 
 ## 特徴
-- チャット機能
-- リアルタイムメッセージング
-- チャンネル管理
-- ユーザー管理
+- Googleアカウントを使ったユーザー認証
+- チャンネルベースのメッセージング
+- ダイレクトメッセージ（DM）機能
+- リアルタイム更新
+- メッセージの編集と削除
+- ワークスペース管理
 
 ## このプロジェクトを通して学べること・習得できること
 - TypeScriptの基本と応用
-- フロントエンド開発の基礎（HTML, CSS）
-- Dockerを用いたコンテナ化
-- 状態管理の実践（Reduxなど）
-- リアルタイム通信の実装（WebSocket）
-- RESTful APIの設計と実装
-- ユーザー認証と認可の実装
-- テスト駆動開発（TDD）の実践
+- Reactコンポーネントの設計とライフサイクル
+- Reduxを使った状態管理
+- TailwindCSSによるスタイリング
+- Firebaseとの連携（Authentication, Firestore）
+- ファイル構造の整理と保守性の高いコード設計
+- Material UIコンポーネントの活用
 
 ```mermaid
 graph TD;
-    A[User] -->|Send Message| B[Server];
-    B -->|Forward to Channel| C[Channel];
-    C -->|Broadcast to Users| D[Users];
+    A[User] -->|Send Message| B[Firebase];
+    B -->|Firestore Updates| C[Channel/DM];
+    C -->|Real-time Listeners| D[Other Users];
     D -->|Receive Message| A;
 ```
 
+## 技術スタック
+- フロントエンド: React, TypeScript, Redux Toolkit
+- UIライブラリ: Material UI, TailwindCSS
+- バックエンド: Firebase (Firestore, Authentication)
+- 状態管理: Redux
+- 開発環境: Docker
+
 ## 必要条件
 - Node.js
-- Docker
 - npm または yarn
+- Firebase アカウントと設定
+- Docker（オプション）
 
 ## インストール手順
 1. リポジトリをクローンします。
@@ -42,36 +51,38 @@ graph TD;
     cd slackclone
     npm install
     ```
-3. Dockerコンテナを起動します。
+3. `.env`ファイルを作成し、Firebaseの設定を追加します（必要に応じて）。
+4. アプリケーションを起動します。
+    ```bash
+    npm start
+    ```
+   
+   または、Dockerを使用する場合：
     ```bash
     docker-compose up
     ```
 
-## 使用方法
-1. アプリケーションを起動します。
-    ```bash
-    npm start
-    ```
-2. ブラウザで `http://localhost:3000` にアクセスします。
+## 主要な機能
+- **認証機能**: Googleアカウントを使ったログイン/ログアウト
+- **チャンネル管理**: チャンネルの作成、編集、削除
+- **メッセージング**: テキストメッセージの送信、編集、削除
+- **ダイレクトメッセージ**: ユーザー間の1対1のメッセージング
+- **ユーザー管理**: オンライン状態の表示、ユーザー検索
+- **ワークスペース**: 複数ワークスペースの管理と切り替え
 
-## 機能一覧
-- チャット機能
-- リアルタイムメッセージング
-- チャンネル管理
-- ユーザー管理
-- メッセージの検索
-- 通知機能
-
-## 技術スタック
-- フロントエンド: React, TypeScript
-- バックエンド: Node.js, Express
-- データベース: MongoDB
-- リアルタイム通信: WebSocket
-- コンテナ化: Docker
-
-## 追加資料
-- [設計図](docs/design.md)
-- [APIドキュメント](docs/api.md)
+## プロジェクト構造
+- `src/app/`: Reduxストア設定
+- `src/components/`: UIコンポーネント
+- `src/features/`: 機能別モジュール
+  - `auth/`: 認証関連
+  - `channel/`: チャンネル関連
+  - `message/`: メッセージ関連
+  - `dm/`: ダイレクトメッセージ関連
+  - `users/`: ユーザー管理関連
+  - `workplace/`: ワークスペース関連
+- `src/firebase/`: Firebase設定
+- `src/type/`: TypeScript型定義
+- `src/utils/`: ユーティリティ関数
 
 ## 貢献方法
 1. リポジトリをフォークします。
